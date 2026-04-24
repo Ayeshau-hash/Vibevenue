@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Highlights</title>
+        <link rel="icon" type="image/png" href="image/webicon.png">
+</head>
+
+<body>
+    <header>
+        <button class="humburger" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+        <div class="logo">
+            <img src="image/logo.png" alt="logo" width="50">
+        </div>
+        <div class="nav">
+            <nav class="nav-bar" id="nav-bar">
+                <ul id="nav-link">
+                    <li><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="index.html#service" class="nav-link">Services</a></li>
+                    <li><a href="#gallery" class="nav-link">Highlights</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="gallery">
+    <div class="gal">
+        <h2>Event Highlights</h2>
+        <p>Discover unforgettable moments from our customized events and celebarations.</p>
+        <div class="gallery" id="gallery-container">
+            <!-- Gallery items will be loaded here -->
+               <div class="gallery-item">
+                <img src="image\26bd10c503e9c2aee31bf57b2e6d25db.jpg" class="gallery-img" alt="Birthday Celebration">
+                <div class="gallery-overlay">
+                    <h4>Birthday Celebration</h4>
+                    <p>Colorful themes and joyful decorations</p> 
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\IMG-20251230-WA0066.jpg" class="gallery-img" alt="Grand Reception">
+                <div class="gallery-overlay">
+                    <h4>Grand Reception</h4>
+                    <p>Luxurious venue decoration for memorable celebrations</p> 
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\IMG-20251230-WA0054.jpg" class="gallery-img" alt="Engagement Ceremony">
+                <div class="gallery-overlay">
+                    <h4>Engagement Ceremony</h4>
+                    <p>Romantic settings for your special moment</p>  
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\d5e3df8630e1880007b0146cade64305.jpg " class="gallery-img" alt="Elegant Mehndi Setup">
+                <div class="gallery-overlay">
+                    <h4>Mehndi Setup</h4>
+                    <p>Twinkling lights and lenterns for memorable celebrations</p> 
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\IMG-20251230-WA0144.jpg" class="gallery-img" alt="Elegant Wedding Setup">
+                <div class="gallery-overlay">
+                    <h4>Elegant Wedding Setup</h4>
+                    <p>Beautiful floral arrangements and romantic ambiance</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\0bb6b094485d2fd93cb093ad5698ddab.jpg" class="gallery-img" alt="Dinner Party">
+                <div class="gallery-overlay">
+                    <h4>Dinner Party</h4>
+                    <p>Elegant dining arrangements and ambiance</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\IMG-20251230-WA0116.jpg" class="gallery-img" alt="Anniversary Celebration">
+                <div class="gallery-overlay">
+                    <h4>Anniversary Celebration</h4>
+                    <p>Romantic decor for milestone moments</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\IMG-20251230-WA0101.jpg" class="gallery-img" alt="Floral Decoration">
+                <div class="gallery-overlay">
+                    <h4>Floral Decoration</h4>
+                    <p>Stunning flower arrangements and centerpieces</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\23c801c4f4a3c62d2ad01bcaaefc38b6.jpg" class="gallery-img" alt="Stair Design">
+                <div class="gallery-overlay">
+                    <h4>Stair Design</h4>
+                    <p>Eye-catching stair setups for all events</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\IMG-20251230-WA0114.jpg" class="gallery-img" alt="Lighting Setup">
+                <div class="gallery-overlay">
+                    <h4>Lighting Setup</h4>
+                    <p>Magical lighting to set the perfect mood</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\IMG-20251230-WA0130.jpg" class="gallery-img" alt="Table Setting">
+                <div class="gallery-overlay">
+                    <h4>Table Setting</h4>
+                    <p>Exquisite table arrangements and decor</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\IMG-20251230-WA0099.jpg" class="gallery-img" alt="Outdoor Event">
+                <div class="gallery-overlay">
+                    <h4>Outdoor Event</h4>
+                    <p>Beautiful outdoor venue transformations</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\IMG-20251230-WA0047.jpg" class="gallery-img" alt="Baby Shower">
+                <div class="gallery-overlay">
+                    <h4>Baby Shower</h4>
+                    <p>Sweet and adorable themed decorations</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image\e311bdf9b6b77e5e1cb9e51476ee2660.jpg" class="gallery-img" alt="Corporate Event">
+                <div class="gallery-overlay">
+                    <h4>Corporate Event</h4>
+                    <p>Professional setup for business gatherings</p> 
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-wrapper">
+            <img id="modalImage" class="modal-content" alt="Zoomed Image">
+            <div class="modal-likes">
+                <i class="fa-solid fa-heart"></i>
+                <span id="likeCount">0</span> likes
+            </div>
+        </div>
+    </div>
+    </section>
+    <script src="script.js"></script>
+    <script>
+        // Load gallery images dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('admin/getGallery.php')
+                .then(response => response.json())
+                .then(images => {
+                    const container = document.getElementById('gallery-container');
+                    images.forEach(image => {
+                        const item = document.createElement('div');
+                        item.className = 'gallery-item';
+                        item.innerHTML = `
+                            <img src="uploads/${image.image_path}" class="gallery-img" alt="${image.title}">
+                            <div class="gallery-overlay">
+                                <h4>${image.title}</h4>
+                                <p>${image.description}</p>
+                            </div>
+                        `;
+                        container.appendChild(item);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading gallery:', error);
+                });
+        });
+    </script>
+</body>
+<footer>
+    <div class="foter">
+        <div class="prt1">
+            <h4>Contact Us</h4>
+            <div class="info">
+                <div class="icon">
+                    <div><i class="fa fa-map-marker"></i></div>
+                    <div><i class="fa-solid fa-envelope"></i></div>
+                    <div><i class="fa-solid fa-phone"></i></div>
+                </div>
+                <div class="info-ic">
+                    <div id="link">
+                        <address>I-8 Markaz Islambad Pakistan</address>
+                    </div>
+                    <div id="link"><a href="">info@vibeandvenue.com</a></div>
+                    <div id="link"><a href="tel:+92300XXXXXXX">+92300XXXXXXX</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="prt2">
+            <h4>Quick Links</h4>
+            <div class="quick-link">
+                <div class="icon">
+                    <div><i class="fa-regular fa-house"></i></div>
+                    <div><i class="fas fa-ticket-alt"></i></div>
+                    <div> <i class="fa-solid fa-image"></i></div>
+                    <div><i class="fa-solid fa-phone"></i></div>
+                </div>
+                <div class="sec">
+                    <div id="link"><a href="#home">Home</a></div>
+                    <div id="link"><a href="#service">Services</a></div>
+                    <div id="link"><a href="#gallery">Gallery</a></div>
+                    <div id="link"><a href="#contact">Contact</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="ft">&COPY; 2026 Vibe & Venue. All rights reserved. Designed by Ayesha.</p>
+</footer>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="image/webicon.png">
+    <title>Reviews</title>
+</head>
+<body>
+    <header>
+        <button class="humburger" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+        <div class="logo">
+            <img src="image\logo.png" alt="logo" width="50">
+        </div>
+    <div class="nav">
+            <nav class="nav-bar" id="nav-bar">
+                <ul id="nav-link">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="gallery.html" class="nav-link">Highlights</a></li>
+                    <li><a href="#reviews" class="nav-link">Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="reviews">
+            <h2>See What Our Clients Say</h2>
+            <div class="client">
+                <div class="wrapper">
+                    <div class="review-container" id="reviewContainer"></div>
+                </div>
+                <div class="pt2">
+                    <form id="reviewForm">
+                        <div id="rev1">
+                            <div>
+                                <label>Name</label>
+                                <input type="text" name="name" class="rev-input" required>
+                            </div>
+                            <div>
+                                <label>Rating</label>
+                                <select name="rating" class="rev-input" required>
+                                    <option value="5">★★★★★</option>
+                                    <option value="4">★★★★</option>
+                                    <option value="3">★★★</option>
+                                    <option value="2">★★</option>
+                                    <option value="1">★</option>
+                                </select>
+                            </div>
+                            <div><label>Write your review</label>
+                                <textarea name="review" class="rev-input" required></textarea>
+                            </div>
+                            <div><button type="submit">Submit Review</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script src="script.js" defer></script>
+</body>
+<footer>
+    <div class="foter">
+        <div class="prt1">
+            <h4>Contact Us</h4>
+            <div class="info">
+                <div class="icon">
+                    <div><i class="fa fa-map-marker"></i></div>
+                    <div><i class="fa-solid fa-envelope"></i></div>
+                    <div><i class="fa-solid fa-phone"></i></div>
+                </div>
+                <div class="info-ic">
+                    <div id="link">
+                        <address>I-8 Markaz Islambad Pakistan</address>
+                    </div>
+                    <div id="link"><a href="">info@vibeandvenue.com</a></div>
+                    <div id="link"><a href="tel:+92300XXXXXXX">+92300XXXXXXX</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="prt2">
+            <h4>Quick Links</h4>
+            <div class="quick-link">
+                <div class="icon">
+                    <div><i class="fa-regular fa-house"></i></div>
+                    <div><i class="fas fa-ticket-alt"></i></div>
+                    <div> <i class="fa-solid fa-image"></i></div>
+                    <div><i class="fa-solid fa-phone"></i></div>
+                </div>
+                <div class="sec">
+                    <div id="link"><a href="index.html">Home</a></div>
+                    <div id="link"><a href="services.html">Services</a></div>
+                    <div id="link"><a href="gallery.html">Highlights</a></div>
+                    <div id="link"><a href="#reviews">Reviews
+                    </a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="ft">&COPY; 2026 Vibe & Venue. All rights reserved.</p>
+</footer>
+</html>

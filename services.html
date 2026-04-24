@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/png" href="image/webicon.png">
+    <title>Servicesx</title>
+    <script>
+    // Global state for booking modal
+    window.pendingVenue = '';
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Page loaded - setting up booking modal...');
+        
+        // Load venues and decor dynamically
+        loadVenuesIntoSelect();
+        loadDecorIntoSelect();
+    });
+
+    function loadVenuesIntoSelect() {
+        fetch('admin/getVenue.php')
+            .then(response => response.json())
+            .then(venues => {
+                const select = document.getElementById('venueSelect');
+                select.innerHTML = '<option value="">-- Select Venue --</option>';
+                venues.forEach(venue => {
+                    const option = document.createElement('option');
+                    option.value = venue.location;
+                    option.setAttribute('data-price', venue.price);
+                    option.textContent = `${venue.location} - Rs ${venue.price}`;
+                    select.appendChild(option);
+                });
+                
+                // Apply pending venue if one was set before dropdown loaded
+                if (window.pendingVenue) {
+                    select.value = window.pendingVenue;
+                    if (typeof updateVenuePrice === 'function') {
+                        updateVenuePrice();
+                    }
+                    window.pendingVenue = '';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading venues:', error);
+            });
+    }
+
+    function loadDecorIntoSelect() {
+        fetch('admin/getDecor.php')
+            .then(response => response.json())
+            .then(decor => {
+                const container = document.getElementById('decorOptions');
+                container.innerHTML = '';
+                decor.forEach(item => {
+                    const label = document.createElement('label');
+                    label.className = 'decor-option';
+                    label.innerHTML = `
+                        <input type="checkbox" class="decor-checkbox" data-price="${item.price}" onchange="calculateTotal()">
+                        <span>${item.name} - Rs ${item.price.toLocaleString()}</span>
+                    `;
+                    container.appendChild(label);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading decor:', error);
+            });
+    }
+    </script>
+</head>
+
+<body>
+    <header>
+        <button class="humburger" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+        <div class="logo">
+            <img src="image/logo.png" alt="logo" width="50">
+        </div>
+        <div class="nav">
+            <nav class="nav-bar" id="nav-bar">
+                <ul id="nav-link">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="#service" class="nav-link">Services</a></li>
+                    <li><a href="gallery.html" class="nav-link">Highlights</a></li>
+                    <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="service">
+        <div class="service-container">
+            <h2 style="padding-bottom: 0;">Our Services</h2>
+            <div style="margin-bottom: 1rem; margin-top: 1rem;"><strong style="color: black; font-size:1.4rem;"> Every Moment Unforgettable with Vibe & Venue</strong></div>
+            <div style="padding-bottom: 1rem;"><p style="font-size: large; ">
+            At Vibe & Venue, we specialize in turning your events into extraordinary experiences. Whether you're
+            planning a wedding, corporate gathering, birthday party, or a private celebration, 
+            our expert team is here to handle everything with perfection and creativity.
+            From elegant venue selection to stunning décor, seamless event management, and personalized themes — we
+            bring your vision to life. Our goal is to create a unique vibe that reflects your style while ensuring a
+            stress-free and memorable experience for you and your guests.</p></div>
+            <div class="container">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <img src="image\IMG-20251230-WA0077.jpg" alt="birthday" title="birthday party">
+                            <h4>Birthday Party</h4>
+                        </div>
+                        <div class="back">
+                            <strong style="color: black;">What We Offer</strong>
+                            <ul>
+                                <li>Theme-based decoration</li>
+                                <li>Ballons & backdrop setup</li>
+                                <li>Cake table styling</li>
+                                <li>Music & lighting arrangement</li>
+
+                            </ul>
+                            <div class="stars">☆☆☆☆☆</div>
+                             <button class="booking-btn" data-service="Birthday Party" data-price="15000" data-venue="Grand Hall" style="z-index: 1000; position: relative;">
+                                 Book Now
+                             </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <img src="image\IMG-20251230-WA0164.jpg" alt="Engagement" title="Engagement">
+                            <h4>Engagement</h4>
+                        </div>
+                        <div class="back">
+                            <strong style="color: black;">What We Offer</strong>
+                            <ul>
+                                <li>Elegant stage decoration</li>
+                                <li>Floral & lighting setup</li>
+                                <li>Seating arrangement</li>
+                                <li>Complete event managemrnt</li>
+                            </ul>
+                            <div class="stars">☆☆☆☆☆</div>
+                             <button class="booking-btn" data-service="Engagement" data-price="25000" data-venue="Ballroom">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <img src="image\IMG-20251230-WA0139.jpg" alt="Wedding" title="Wedding">
+                            <h4>Wedding</h4>
+                        </div>
+                        <div class="back">
+                            <strong style="color: black;">What We Offer</strong>
+                            <ul>
+                                <li>Guest management</li>
+                                <li>Floral theme & lighting</li>
+                                <li>Venue & stage decoration</li>
+                                <li>Complete wedding planning</li>
+                            </ul>
+                            <div class="stars">☆☆☆☆☆</div>
+                             <button class="booking-btn" data-service="Wedding" data-price="50000" data-venue="Ballroom">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <img src="image\IMG-20251230-WA0080.jpg" alt="Baby Shower" title="Baby shower">
+                            <h4>Baby & Bridal Shower</h4>
+                        </div>
+                        <div class="back">
+                            <strong style="color: black;">What We Offer</strong>
+                            <ul>
+                                <li>Creative theme decoration</li>
+                                <li>Customized props & setup</li>
+                                <li>Photo corner design</li>
+                                <li>Soft lighting & dècor</li>
+                            </ul>
+                            <div class="stars">☆☆☆☆☆</div>
+                             <button class="booking-btn" data-service="Baby & Bridal Shower" data-price="12000" data-venue="Grand Hall">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <img src="image\IMG-20251230-WA0007.jpg" alt="Aniversary" title="Aniversary">
+                            <h4>Aniversary</h4>
+                        </div>
+                        <div class="back">
+                            <strong style="color: black;">What We Offer</strong>
+                            <ul>
+                                <li>Romantic theme dècor</li>
+                                <li>Table & backup styling</li>
+                                <li>Lighting & floral design</li>
+                                <li>Personalized setup</li>
+                            </ul>
+                            <div class="stars">☆☆☆☆☆</div>
+                             <button class="booking-btn" data-service="Anniversary" data-price="18000" data-venue="Ballroom">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <img src="image\IMG-20251230-WA0040.jpg" alt="Dinner" title="Dinner">
+                            <h4>Dinner & Conference</h4>
+                        </div>
+                        <div class="back">
+                            <strong style="color: black;">What We Offer</strong>
+                            <ul>
+                                <li>Professional venue setup</li>
+                                <li>Stage & seating arrangement</li>
+                                <li>Formal dècor themes</li>
+                                <li>Complete coordination</li>
+                            </ul>
+                            <div class="stars">☆☆☆☆☆</div>
+                             <button class="booking-btn" data-service="Dinner & Conference" data-price="20000" data-venue="Grand Hall">Book Now</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="booking-modal">
+        <div class="booking-modal-content">
+            <span class="booking-close" onclick="closeBookingModal()">&times;</span>
+            <h2>Book Your Event</h2>
+            <p id="selectedService" style="font-size: 1.2rem; color: #E1AA7D; margin-bottom: 1rem;"></p>
+            
+            <h3>Select Venue/Place</h3>
+            <div class="form-group">
+                <select id="venueSelect" class="input" onchange="updateVenuePrice()">
+                    <option value="">-- Select Venue --</option>
+                    <option value="Grand Hall" data-price="10000">Grand Hall - Rs 10,000</option>
+                    <option value="Garden" data-price="8000">Garden - Rs 8,000</option>
+                    <option value="Rooftop" data-price="6000">Rooftop - Rs 6,000</option>
+                    <option value="Ballroom" data-price="15000">Ballroom - Rs 15,000</option>
+                    <option value="Outdoor" data-price="7000">Outdoor - Rs 7,000</option>
+                </select>
+            </div>
+            
+            <h3>Select Decor Options</h3>
+            <div class="decor-options" id="decorOptions">
+            </div>
+            
+            <div class="total-price">
+                <h3>Total Price: Rs <span id="totalPrice">0</span></h3>
+            </div>
+            
+            <h3>Your Details</h3>
+            <form id="bookingDetailsForm">
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" id="bookingName" class="input" required>
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="bookingEmail" class="input" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone *</label>
+                    <input type="tel" id="bookingPhone" class="input" required>
+                </div>
+                <div class="form-group">
+                    <label>Event Date *</label>
+                    <input type="date" id="bookingDate" class="input" required>
+                </div>
+                <div class="form-group">
+                    <label>Additional Details</label>
+                    <textarea id="bookingNotes" class="input" rows="3"></textarea>
+                </div>
+            </form>
+            
+            <div class="booking-confirm">
+                <p>Are you ready for booking?</p>
+                <div class="confirm-buttons">
+                    <button type="button" class="confirm-yes" onclick="confirmBooking()">Yes, Book Now</button>
+                    <button type="button" class="confirm-no" onclick="closeBookingModal()">Cancel</button>
+                </div>
+            </div>
+            
+            <div id="bookingSuccess" class="booking-success">
+                <h3>✅ Booking Sent Successfully!</h3>
+                <p>We will contact you soon.</p>
+                <p id="bookingIdDisplay"></p>
+                <button type="button" class="confirm-no" onclick="closeBookingModal()" style="margin-top: 1rem;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=10"></script>
+    <script>
+        // Global state
+        window.pendingVenue = '';
+        
+        // Load venues and decor dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVenuesIntoSelect();
+            loadDecorIntoSelect();
+        });
+
+        function loadVenuesIntoSelect() {
+            fetch('admin/getVenue.php')
+                .then(response => response.json())
+                .then(venues => {
+                    const select = document.getElementById('venueSelect');
+                    select.innerHTML = '<option value="">-- Select Venue --</option>';
+                    venues.forEach(venue => {
+                        const option = document.createElement('option');
+                        option.value = venue.location;
+                        option.setAttribute('data-price', venue.price);
+                        option.textContent = `${venue.location} - Rs ${venue.price}`;
+                        select.appendChild(option);
+                    });
+                    
+                    // Apply pending venue if set
+                    if (window.pendingVenue) {
+                        select.value = window.pendingVenue;
+                        if (typeof updateVenuePrice === 'function') {
+                            updateVenuePrice();
+                        }
+                        window.pendingVenue = '';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading venues:', error);
+                });
+        }
+
+        function loadDecorIntoSelect() {
+            fetch('admin/getDecor.php')
+                .then(response => response.json())
+                .then(decor => {
+                    const container = document.getElementById('decorOptions');
+                    container.innerHTML = '';
+                    decor.forEach(item => {
+                        const label = document.createElement('label');
+                        label.className = 'decor-option';
+                        label.innerHTML = `
+                            <input type="checkbox" class="decor-checkbox" data-price="${item.price}" onchange="calculateTotal()">
+                            <span>${item.name} - Rs ${item.price.toLocaleString()}</span>
+                        `;
+                        container.appendChild(label);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading decor:', error);
+                });
+        }
+    </script>
+</body>
+<footer>
+    <div class="foter">
+        <div class="prt1">
+            <h4>Contact Us</h4>
+            <div class="info">
+                <div class="icon">
+                    <div><i class="fa fa-map-marker"></i></div>
+                    <div><i class="fa-solid fa-envelope"></i></div>
+                    <div><i class="fa-solid fa-phone"></i></div>
+                </div>
+                <div class="info-ic">
+                    <div id="link">
+                        <address>I-8 Markaz Islambad Pakistan</address>
+                    </div>
+                    <div id="link"><a href="">info@vibeandvenue.com</a></div>
+                    <div id="link"><a href="tel:+92300XXXXXXX">+92300XXXXXXX</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="prt2">
+            <h4>Quick Links</h4>
+            <div class="quick-link">
+                <div class="icon">
+                    <div><i class="fa-regular fa-house"></i></div>
+                    <div><i class="fas fa-ticket-alt"></i></div>
+                    <div> <i class="fa-solid fa-image"></i></div>
+                    <div><i class="fa-solid fa-phone"></i></div>
+                </div>
+                <div class="sec">
+                    <div id="link"><a href="index.html">Home</a></div>
+                    <div id="link"><a href="#service">Services</a></div>
+                    <div id="link"><a href="gallery.html">Gallery</a></div>
+                    <div id="link"><a href="reviews.html">Reviews</a></div>
+                </div>
+                Re
+            </div>
+        </div>
+    </div>
+    <p class="ft">&COPY; 2026 Vibe & Venue. All rights reserved.</p>
+</footer>
+
+</html>
